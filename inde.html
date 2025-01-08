@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatterUp</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="main">
+        <div id="top-bar">
+            <div id="app-name">ChatterUp</div>
+            <div class="typing"></div>
+        </div>
+        <div id="chatting">
+            <div id="chating-area">
+
+            </div>
+            <div id="text-button-area">
+                <input type="text" id="chat-text" placeholder="Type Message" class="form-control">
+                <button type="submit" class="form-control" id="text-sendbtn">Send</button>
+            </div>
+        </div>
+        <div id="registration">
+            <div id="register-and-button-area">
+                <input type="text" id="username" placeholder="Your Name" class="form-control">
+                <input type="text" id="room-id" placeholder="Room ID" class="form-control">
+                <button type="submit" class="form-control" id="register-btn">Register</button>
+            </div>
+            <div id="join-message-area">
+                <!-- <div class="join-user">harendrasinh has Join the room</div> -->
+            </div>
+        </div>
+    </div>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io.connect("http://localhost:3000");
+
+
+        // --------------------------------Registration-------------------------------------------
+        // ----------------DOM---------------------
+        const registerDiv = document.querySelector("#register-and-button-area");
+        const userName = document.querySelector("#username");
+        const roomId = document.querySelector("#room-id");
+        const registerBtn = document.querySelector("#register-btn");
+        const joinMessageArea = document.querySelector("#join-message-area");
+        const registerBlock = document.querySelector("#register-and-button-area");
+
+
+
+        // ------------------------Send to server-Register-detail--------------
+        let username = "";
+        let roomid = "";
+        registerBtn.addEventListener("click", () => {
+            username = userName.value;
+            roomid = roomId.value;
+            if (username && roomid) {
+                socket.emit("user-detail", { username, roomid });
+                userName.value = "";
+                roomId.value = "";
+                registerBlock.classList.add("rgistration-box-hide");
+            }
+        });
+
+        // -------------listen-server response-----
+        socket.on("join-message", (data) => {
+            const newElement = document.createElement("div");
+            newElement.classList.add("join-user");
+            newElement.innerHTML = `<strong>${data.username}</strong> Has join the Room`
+            joinMessageArea.appendChild(newElement);
+
+        })
+        // --------------------------------typing message to server-----------------------------------------------
+        const chatingText = document.querySelector("#chat-text");
+        const topBar = document.querySelector("#top-bar");
+        const Typing = document.querySelector(".typing");
+        let TimeOut;
+        chatingText.addEventListener("input", () => {
+            clearTimeout(TimeOut);
+            socket.emit("start-typing", { username, roomid });
+            TimeOut = setTimeout(() => {
+                socket.emit("stop-typing", { username, roomid });
+            }, 1000);
+        });
+        // ---------------------------------typing listening----------------------------------------------------
+        socket.on("start", (data) => {
+            Typing.innerHTML = `<strong>${data.username}</strong> is Typing....`
+            Typing.style.display = "block"
+        })
+        socket.on("stop", (data) => {
+            Typing.innerHTML = `<strong>${data.username}</strong> is Typing....`
+            Typing.style.display = "none"
+        })
+        // -------------------------------------text message send to server-------------------------------------
+        const textMessage = document.querySelector("#chat-text")
+        const textSendBtn = document.querySelector("#text-sendbtn")
+        const chatingArea = document.querySelector("#chating-area")
+
+        textSendBtn.addEventListener("click", () => {
+            const textValue = textMessage.value;
+            if (textValue) {
+                socket.emit("text-message", { username, textValue, roomid });
+                textMessage.value = "";
+            }
+        });
+        function displayMsg(user, text) {
+            if (username == user) {
+                const owner = document.createElement("div");
+                owner.classList.add("owner");
+                owner.innerHTML = `${text}:<strong>${user}</strong>`;
+                chatingArea.appendChild(owner);
+            } else {
+                const other = document.createElement("div");
+                other.classList.add("other");
+                other.innerHTML = `<strong>${user}</strong>:${text}`;
+                chatingArea.appendChild(other);
+                chatingArea.scrollTop = chatBox.scrollHeight;
+            }
+        }
+        socket.on("textdata", (data) => {
+            const userN = data.username;
+            const textV = data.textValue
+            displayMsg(userN, textV);
+            console.log(userN);
+            console.log(textV);
+        });
+    </script>
+</body>
+
+</html>

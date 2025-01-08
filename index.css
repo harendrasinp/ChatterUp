@@ -1,0 +1,166 @@
+#main{
+    position: relative;
+    width:100vw;
+    height:100vh;
+    background-image: url(/image/background-image.jpg);
+}
+/* --------------------------------------top-bar-------------------------------------- */
+#top-bar{
+    position: relative;
+    width:100vw;
+    height:6vh;
+    background-color: rgb(23, 37, 24);
+    opacity: 0.5;
+}
+#app-name{
+    position: relative;
+    text-align: center;
+    color: aqua;
+    font-size:20px;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.typing{
+    position: absolute;
+    top:45%;
+    left: 5%;
+    color: rgb(9, 250, 25);
+}
+/* -------------------------------------chating----------------------------------------- */
+#chatting{
+    position: absolute;
+    width:70%;
+    height:570px;
+    border-right: 5px solid rgb(61, 58, 58);
+}
+/* -----------------------------------chating-area-------------------------------------- */
+#chating-area{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height:520px;
+}
+.owner{
+    align-self:flex-end;
+    width: fit-content;
+    background-color: rgb(233, 202, 165);
+    padding: 5px; 
+    margin: 5px;
+    border-radius: 5px;
+}
+.other{
+    align-self:flex-start;
+    width: fit-content;
+    background-color: rgb(233, 202, 165);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+/* -------------------------------------text-button-area------------------------------------- */
+#text-button-area{
+    position: relative;
+    width:100%;
+    height:40px;
+}
+/* ------------------------text-box------------- */
+#text-button-area input[type="text"]{
+    position: absolute;
+    display: inline-block;
+    left: 2%;
+    width: 80%;
+    height:30px;
+    color: bisque;
+    background: transparent;
+}
+#text-button-area button{
+    position: absolute;
+    left:80%;
+    display: inline-block;
+    width:15%;
+    height:30px;
+}
+/* ----------------------------------------------Registration Area---------------------------------------------- */
+#registration{
+    position:relative;
+    left:73%;
+    top:20%;
+    width:25%;
+    height:60px;
+}
+#register-and-button-area input[type="text"]{
+    position:relative;
+    margin-bottom: 8px;
+    background: transparent;
+    color: bisque;
+}
+/* ---------------------------------------------join message-area------------------------------------------ */
+#join-message-area{
+    position:relative;
+    top:50%;
+    height:180px;
+}
+.join-user{
+    position:relative;
+    margin-bottom:5px;
+    width:100%;
+    height:30px;
+    color: rgb(47, 185, 185);
+    font-size:12px;
+}
+/* ------------------------------------------media Query---------------------------------------------- */
+@media (max-width:400px){
+/* ---------------------------------------main----------------------------------------------- */
+#main{
+    position: relative;
+    width:100vw;
+    height:125vh;
+    background-image: url(/image/background-image.jpg);
+}
+/* -------------------------------------chating----------------------------------------- */
+#chatting{
+    position: absolute;
+    width:100%;
+    height:500px;
+}
+/* -----------------------------chating area---------------- */
+#chating-area{
+    width:100%;
+    height:450px;
+    overflow-y: scroll;
+}
+
+/* ------------------------text-butoon-area------------------*/
+#text-button-area{
+    position: relative;
+    width:104%;
+    height:40px;
+}
+/* ---------------------------------------------------------Registration Area-------------------------------- */
+#registration{
+    position:relative;
+    top:60%;
+    left:4%;
+    width:90%;
+    height:60px;
+}
+/* ------------------------------------------------------join message area--------------------------------- */
+#join-message-area{
+    position:relative;
+    width:90vw;
+    height:162px;
+}
+.join-user{
+    position:absolute;
+    margin-bottom:5px;
+    width:100%;
+    height:30px;
+    color: rgb(47, 185, 185);
+    font-size:20px;
+}
+.rgistration-box-hide{
+    display: none;
+}
+/* .join-message-visible{
+    display: block;
+} */
+}
