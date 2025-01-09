@@ -20,6 +20,7 @@ io.on("connection", (socket) => {
     // -----------resgitration-message----------
     socket.on("user-detail",async(data)=>{
         socket.join(data.roomid);
+
         socket.broadcast.to(data.roomid).emit("join-message",data);
     });
     
@@ -36,6 +37,7 @@ io.on("connection", (socket) => {
     const chatData=new chatterModel({
         name:data.username,
         text:data.textValue,
+        roomId:data.roomid,
     });
     await chatData.save();
     socket.join(data.roomid);
