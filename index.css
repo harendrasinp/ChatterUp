@@ -39,6 +39,7 @@
     flex-direction: column;
     width:100%;
     height:520px;
+    overflow-y: scroll;
 }
 .owner{
     align-self:flex-end;

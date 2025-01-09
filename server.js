@@ -19,8 +19,10 @@ io.on("connection", (socket) => {
     console.log("Connected.");
     // -----------resgitration-message----------
     socket.on("user-detail",async(data)=>{
-        socket.join(data.roomid);
-
+        const roomid=data.roomid;
+        socket.join(roomid);
+        const prevText=await chatterModel.find({roomId:roomid});
+        socket.emit("previ-messages",prevText)
         socket.broadcast.to(data.roomid).emit("join-message",data);
     });
     

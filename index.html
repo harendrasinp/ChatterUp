@@ -72,6 +72,15 @@
             newElement.innerHTML = `<strong>${data.username}</strong> Has join the Room`
             joinMessageArea.appendChild(newElement);
 
+        });
+        socket.on("previ-messages",(prevText)=>{
+            prevText.forEach((msg)=>{
+                const loadText = document.createElement("div");
+                loadText.classList.add("other");
+                loadText.innerHTML=`<strong>${msg.name}:${msg.text}`
+                chatingArea.appendChild(loadText);
+                    console.log(msg.username);
+            });
         })
         // --------------------------------typing message to server-----------------------------------------------
         const chatingText = document.querySelector("#chat-text");
@@ -121,7 +130,6 @@
                 other.classList.add("other");
                 other.innerHTML = `<strong>${user}</strong>:${text}`;
                 chatingArea.appendChild(other);
-                chatingArea.scrollTop = chatBox.scrollHeight;
             }
         }
         socket.on("textdata", (data) => {
