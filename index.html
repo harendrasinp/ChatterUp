@@ -65,7 +65,6 @@
                 registerBlock.classList.add("rgistration-box-hide");
             }
         });
-
         // -------------listen-server response-----
         socket.on("join-message", (data) => {
             const newElement = document.createElement("div");
@@ -80,11 +79,13 @@
         const Typing = document.querySelector(".typing");
         let TimeOut;
         chatingText.addEventListener("input", () => {
+           if(username){
             clearTimeout(TimeOut);
             socket.emit("start-typing", { username, roomid });
             TimeOut = setTimeout(() => {
                 socket.emit("stop-typing", { username, roomid });
             }, 1000);
+           }
         });
         // ---------------------------------typing listening----------------------------------------------------
         socket.on("start", (data) => {
@@ -102,9 +103,11 @@
 
         textSendBtn.addEventListener("click", () => {
             const textValue = textMessage.value;
-            if (textValue) {
+            if(username){
+                if (textValue) {
                 socket.emit("text-message", { username, textValue, roomid });
                 textMessage.value = "";
+            }
             }
         });
         function displayMsg(user, text) {

@@ -56,6 +56,15 @@
     padding: 5px;
     border-radius: 5px;
 }
+#error-msg{
+    padding: 20px;
+    font-size:18px;
+    background-color: antiquewhite;
+    display: none;
+}
+.error-message-visible{
+    display: block;
+}
 /* -------------------------------------text-button-area------------------------------------- */
 #text-button-area{
     position: relative;

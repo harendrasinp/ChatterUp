@@ -18,24 +18,24 @@ io.on("connection", (socket) => {
 // --------------------------------------connect-----------------------------------------------------------------
     console.log("Connected.");
     // -----------resgitration-message----------
-    socket.on("user-detail",(data)=>{
+    socket.on("user-detail",async(data)=>{
         socket.join(data.roomid);
-        socket.to(data.roomid).emit("join-message",data);
+        socket.broadcast.to(data.roomid).emit("join-message",data);
     });
     
     socket.on("start-typing",(data)=>{
         socket.join(data.roomid);
-        socket.to(data.roomid).emit("start",data);
+        socket.broadcast.to(data.roomid).emit("start",data);
     });
     socket.on("stop-typing",(data)=>{
         socket.join(data.roomid);
-        socket.to(data.roomid).emit("stop",data);
+        socket.broadcast.to(data.roomid).emit("stop",data);
     });
     // ---------------chatting---------------------
    socket.on("text-message",async(data)=>{
     const chatData=new chatterModel({
         name:data.username,
-        text:data.textValue
+        text:data.textValue,
     });
     await chatData.save();
     socket.join(data.roomid);
