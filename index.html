@@ -123,7 +123,7 @@
             if (username == user) {
                 const owner = document.createElement("div");
                 owner.classList.add("owner");
-                owner.innerHTML = `${text}:<strong>${user}</strong>`;
+                owner.innerHTML = `${text}:<strong>You</strong>`;
                 chatingArea.appendChild(owner);
             } else {
                 const other = document.createElement("div");
@@ -131,6 +131,7 @@
                 other.innerHTML = `<strong>${user}</strong>:${text}`;
                 chatingArea.appendChild(other);
             }
+            chatingArea.scrollTop = chatingArea.scrollHeight;
         }
         socket.on("textdata", (data) => {
             const userN = data.username;
