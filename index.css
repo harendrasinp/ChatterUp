@@ -14,6 +14,7 @@
 }
 #app-name{
     position: relative;
+    top:20%;
     text-align: center;
     color: aqua;
     font-size:20px;
