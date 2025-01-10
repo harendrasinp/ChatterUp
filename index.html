@@ -63,6 +63,7 @@
                 userName.value = "";
                 roomId.value = "";
                 registerBlock.classList.add("rgistration-box-hide");
+                joinMessageArea.classList.add("join-message-area")
             }
         });
         // -------------listen-server response-----
@@ -77,7 +78,7 @@
             prevText.forEach((msg)=>{
                 const loadText = document.createElement("div");
                 loadText.classList.add("other");
-                loadText.innerHTML=`<strong>${msg.name}:${msg.text}`
+                loadText.innerHTML=`<strong>${msg.name}</strong:${msg.text}`
                 chatingArea.appendChild(loadText);
                     console.log(msg.username);
             });

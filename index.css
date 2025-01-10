@@ -41,18 +41,23 @@
     height:520px;
     overflow-y: scroll;
     scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 .owner{
     align-self:flex-end;
     width: fit-content;
+    max-width:50%;
     background-color: rgb(233, 202, 165);
     padding: 5px; 
     margin: 5px;
     border-radius: 5px;
+    word-wrap: break-word;
 }
 .other{
     align-self:flex-start;
     width: fit-content;
+    max-width:50%;
+    word-wrap: break-word;
     background-color: rgb(233, 202, 165);
     margin: 5px;
     padding: 5px;
@@ -136,10 +141,29 @@
 /* -----------------------------chating area---------------- */
 #chating-area{
     width:100%;
-    height:450px;
+    height:580px;
     overflow-y: scroll;
 }
-
+.owner{
+    align-self:flex-end;
+    width: fit-content;
+    max-width:50%;
+    background-color: rgb(233, 202, 165);
+    padding: 5px; 
+    margin: 5px;
+    border-radius: 5px;
+    word-wrap: break-word;
+}
+.other{
+    align-self:flex-start;
+    width: fit-content;
+    max-width:50%;
+    word-wrap: break-word;
+    background-color: rgb(233, 202, 165);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
 /* ------------------------text-butoon-area------------------*/
 #text-button-area{
     position: relative;
@@ -149,7 +173,7 @@
 /* ---------------------------------------------------------Registration Area-------------------------------- */
 #registration{
     position:relative;
-    top:60%;
+    top:80%;
     left:4%;
     width:90%;
     height:60px;
@@ -159,9 +183,10 @@
     position:relative;
     width:90vw;
     height:162px;
+    display: none;
 }
 .join-user{
-    position:absolute;
+    position:relative;
     margin-bottom:5px;
     width:100%;
     height:30px;
@@ -170,5 +195,8 @@
 }
 .rgistration-box-hide{
     display: none;
+}
+.join-message-area{
+    display: block;
 }
 }
