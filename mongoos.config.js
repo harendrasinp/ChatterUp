@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const url = "mongodb://localhost:27017/chatterUp"
+const url = "mongodb+srv://haren111990:rHJVZla6UpbWTBed@cluster0.i5lsy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 export const ConnectingToDbBymongoos = async () => {
    try{
